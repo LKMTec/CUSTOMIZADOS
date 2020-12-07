@@ -228,8 +228,7 @@ CREATE OR REPLACE PACKAGE BODY LKM_LANCTO_CTB_ONESOURCE_CPROC IS
           l_data   lista := lista();
           cont     NUMBER;
         BEGIN
-          LOOP
-            EXIT WHEN l_string IS NULL;
+          while l_string IS NOT  NULL LOOP
             cont := INSTR(l_string, delimitador);
             l_data.EXTEND;
             l_data(l_data.COUNT) := LTRIM(RTRIM(SUBSTR(l_string, 1, cont - 1)));
@@ -243,7 +242,6 @@ CREATE OR REPLACE PACKAGE BODY LKM_LANCTO_CTB_ONESOURCE_CPROC IS
         RETURN INTEGER IS
 
         V_CONT              INTEGER := 0;
-       -- v_periodo           varchar2(6) ;
        
        cursor c01 (ps_empresa   varchar2, Ps_Estab varchar2, ps_incl_excl varchar2,
         ps_dt_ini date, ps_dt_fim  date, ps_tp_docto varchar2, ps_num_lancto varchar2)  is
